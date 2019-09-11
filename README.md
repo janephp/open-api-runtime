@@ -22,3 +22,4 @@ Open Source time sponsored by JoliCode
 ## Credits
 
 * [All contributors](https://github.com/jolicode/jane/graphs/contributors)
+* Update abstract class

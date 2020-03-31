@@ -2,7 +2,7 @@
 
 namespace Jane\OpenApiRuntime\Client;
 
-use Psr\Http\Client\ClientInterface;
+use Http\Client\HttpClient;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
@@ -30,7 +30,7 @@ abstract class Psr18Client extends Client
      */
     protected $streamFactory;
 
-    public function __construct(ClientInterface $httpClient, RequestFactoryInterface $requestFactory, SerializerInterface $serializer, StreamFactoryInterface $streamFactory)
+    public function __construct(HttpClient $httpClient, RequestFactoryInterface $requestFactory, SerializerInterface $serializer, StreamFactoryInterface $streamFactory)
     {
         $this->httpClient = $httpClient;
         $this->requestFactory = $requestFactory;

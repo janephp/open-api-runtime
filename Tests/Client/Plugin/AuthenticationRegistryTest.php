@@ -92,9 +92,11 @@ class AuthenticationRegistryTest extends TestCase
             ->willReturn(['A']);
         $request
             ->method('withHeader')
-            ->willReturnCallback(function (string $name, string $value) {
+            ->willReturnCallback(function (string $name, string $value) use ($request) {
                 $this->assertEquals('A', $name);
                 $this->assertEquals('A', $value);
+
+                return $request;
             });
         $request
             ->method('withoutHeader')
@@ -117,16 +119,20 @@ class AuthenticationRegistryTest extends TestCase
             ->willReturn(['A', 'C']);
         $request
             ->method('withHeader')
-            ->willReturnOnConsecutiveCalls([
-                new ReturnCallback(function (string $name, string $value) {
+            ->willReturnOnConsecutiveCalls(
+                new ReturnCallback(function (string $name, string $value) use ($request) {
                     $this->assertEquals('A', $name);
                     $this->assertEquals('A', $value);
+
+                    return $request;
                 }),
-                new ReturnCallback(function (string $name, string $value) {
+                new ReturnCallback(function (string $name, string $value) use ($request) {
                     $this->assertEquals('C', $name);
                     $this->assertEquals('C', $value);
+
+                    return $request;
                 }),
-            ]);
+            );
         $request
             ->method('withoutHeader')
             ->willReturn($request);
